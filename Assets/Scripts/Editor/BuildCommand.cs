@@ -43,7 +43,7 @@ static class BuildCommand
 
     private static BuildTarget GetBuildTarget()
     {
-        string buildTargetName = GetArgument("customBuildTarget");
+        string buildTargetName = GetArgument("BUILD_TARGET");
         if (string.IsNullOrEmpty(buildTargetName))
         {
             return EditorUserBuildSettings.activeBuildTarget;
@@ -71,11 +71,11 @@ static class BuildCommand
 
     static string GetBuildPath()
     {
-        string buildPath = GetArgument("customBuildPath");
-        Console.WriteLine(":: Received customBuildPath " + buildPath);
+        string buildPath = GetArgument("BUILD_PATH");
+        Console.WriteLine(":: Received BUILD_PATH " + buildPath);
         if (buildPath == "")
         {
-            throw new Exception("customBuildPath argument is missing");
+            throw new Exception("BUILD_PATH argument is missing");
         }
 
         return buildPath;
@@ -83,11 +83,11 @@ static class BuildCommand
 
     static string GetBuildName()
     {
-        string buildName = GetArgument("customBuildName");
-        Console.WriteLine(":: Received customBuildName " + buildName);
+        string buildName = GetArgument("BUILD_NAME");
+        Console.WriteLine(":: Received BUILD_NAME " + buildName);
         if (buildName == "")
         {
-            throw new Exception("customBuildName argument is missing");
+            throw new Exception("BUILD_NAME argument is missing");
         }
 
         return buildName;
@@ -211,7 +211,6 @@ static class BuildCommand
 
         var buildPath = GetBuildPath();
         var buildName = GetBuildName();
-        
         
         if (string.IsNullOrEmpty(buildPath))
         {
