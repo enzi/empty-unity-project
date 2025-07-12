@@ -188,6 +188,13 @@ static class BuildCommand
     [MenuItem("Tools/Build")]
     static void PerformBuild()
     {
+        string[] args = Environment.GetCommandLineArgs();
+
+        foreach (var arg in args)
+        {
+            Debug.Log(arg);    
+        }
+        
         var buildTarget = GetBuildTarget();
 
         Console.WriteLine(":: Performing build");
