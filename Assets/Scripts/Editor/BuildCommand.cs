@@ -94,7 +94,7 @@ static class BuildCommand
 #endif
         }
 
-        return buildPath + buildName;
+        return $"{buildPath}/{buildName}";
     }
 
     static BuildOptions GetBuildOptions()
@@ -200,7 +200,7 @@ static class BuildCommand
         
         if (string.IsNullOrEmpty(buildPath))
         {
-            buildPath = "build/";
+            buildPath = "build";
         }
         
         if (string.IsNullOrEmpty(buildName))
