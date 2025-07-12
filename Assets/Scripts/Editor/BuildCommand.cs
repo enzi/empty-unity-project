@@ -17,20 +17,6 @@ static class BuildCommand
     private const string VERSION_NUMBER_VAR = "VERSION_NUMBER_VAR";
     private const string VERSION_iOS = "VERSION_BUILD_VAR";
 
-    static string GetArgument(string name)
-    {
-        string[] args = Environment.GetCommandLineArgs();
-        for (int i = 0; i < args.Length; i++)
-        {
-            if (args[i].Contains(name))
-            {
-                return args[i + 1];
-            }
-        }
-
-        return null;
-    }
-
     static string[] GetEnabledScenes()
     {
         return (
@@ -43,7 +29,7 @@ static class BuildCommand
 
     private static BuildTarget GetBuildTarget()
     {
-        string buildTargetName = GetArgument("BUILD_TARGET");
+        string buildTargetName = Environment.GetEnvironmentVariable("BUILD_TARGET");
         if (string.IsNullOrEmpty(buildTargetName))
         {
             return EditorUserBuildSettings.activeBuildTarget;
@@ -71,7 +57,7 @@ static class BuildCommand
 
     static string GetBuildPath()
     {
-        string buildPath = GetArgument("BUILD_PATH");
+        string buildPath = Environment.GetEnvironmentVariable("BUILD_PATH");
         Console.WriteLine(":: Received BUILD_PATH " + buildPath);
         if (buildPath == "")
         {
@@ -83,7 +69,7 @@ static class BuildCommand
 
     static string GetBuildName()
     {
-        string buildName = GetArgument("BUILD_NAME");
+        string buildName = Environment.GetEnvironmentVariable("BUILD_NAME");
         Console.WriteLine(":: Received BUILD_NAME " + buildName);
         if (buildName == "")
         {
@@ -188,13 +174,6 @@ static class BuildCommand
     [MenuItem("Tools/Build")]
     static void PerformBuild()
     {
-        string[] args = Environment.GetCommandLineArgs();
-
-        foreach (var arg in args)
-        {
-            Debug.Log(arg);    
-        }
-        
         var buildTarget = GetBuildTarget();
 
         Console.WriteLine(":: Performing build");
